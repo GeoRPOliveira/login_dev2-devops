@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    body{
+      background-color: black;
+      height: 100%;
+    }
+
+    main{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 35.5rem;
+      background-image: url(https://i.pinimg.com/originals/48/5a/74/485a745a8d2f95afbac3924bf715f5bd.gif);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .principal{
+      border: solid black 2px;
+      width: 25rem;
+      height: 20rem;
+      padding-bottom: 2%;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+      align-items: center;
+      border-top-left-radius: 100px;
+      border-bottom-right-radius: 100px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .form{
+      width: 15rem;
+      height: 10rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .bloc_form{
+      border: solid rgb(126, 126, 126) 1px;
+      width: 20em;
+      height: 3em;
+      border-radius: 20px;
+      padding-left: 20px;
+    }
+
+    .bt_login{
+      width: 10em;
+      height: 3em;
+      background-color: #ffe770;
+      border-radius: 20px;
+    }
+    .bt_login:hover{
+      background-color: #d0bb3f;
+      cursor: pointer;
+    }
+    h1{
+      color: white;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div class="principal">
+    <h1>Login</h1>
+    <!--  Formulário de login-->
+    <form action="/perform_login" method="post" class="form">
+      <input type="hidden" name="${+csrf.parameterName}" value="${_csrf.token}">
+      <div id="bloc_user">
+        <label for="username"></label>
+        <input type="text" id="username" class="bloc_form" name="username" placeholder="Usuário">
+      </div>
+
+      <div id="bloc_password">
+        <label for="password"></label>
+        <input type="password" id="password" class="bloc_form" name="password" placeholder="Senha">
+      </div>
+
+      <button type="submit" class="bt_login">Entrar</button>
+    </form>
+
+    <!--  Mensagem de logout-->
+    <div th:if="${param.logout}">
+      <p style="color: blue;" class="mensagem">Você não está mais logado!</p>
+    </div>
+
+    <!--  Mensagem de erro-->
+    <div th:if="${param.error}">
+      <p style="color: red;"  class="mensagem">Usuário ou senha inválidos! Por favor, tente novamente.</p>
+    </div>
+  </div>
+</main>
+</body>
+</html>
